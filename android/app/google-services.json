@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "220376217037",
+    "project_id": "tawseela-app-e5922",
+    "storage_bucket": "tawseela-app-e5922.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:220376217037:android:372642d29ba9263973c084",
+        "android_client_info": {
+          "package_name": "com.example.tewseela_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDL_E71e_CynJxfcIj5UvOacdP8pV2onJ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
