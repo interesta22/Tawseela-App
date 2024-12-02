@@ -79,7 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       textStyle: FontManager.font15WhiteMedium,
                       backgroundColor: ColorManager.mainBlack,
                       onPressed: () {
-                        context.pushNamed(Routes.otpScreen);
+                        context.pushNamed(Routes.bottomNavBar);
                       },
                     ),
                     TextButton(

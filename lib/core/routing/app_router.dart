@@ -6,6 +6,13 @@ import 'package:tewseela_app/features/home/ui/screens/home.dart';
 import 'package:tewseela_app/features/auth/ui/screens/phone.dart';
 import 'package:tewseela_app/features/auth/ui/screens/login.dart';
 import 'package:tewseela_app/features/auth/ui/screens/sign_up.dart';
+import 'package:tewseela_app/features/onbording/ui/widgets/onb1.dart';
+import 'package:tewseela_app/features/trip/ui/screen/TripScreen.dart';
+import 'package:tewseela_app/features/profile/ui/screens/profile.dart';
+import 'package:tewseela_app/features/Cars/ui/screen/Cars_Screen.dart';
+import 'package:tewseela_app/features/home/ui/widgets/bottom_nav_bar.dart';
+import 'package:tewseela_app/features/onbording/ui/screens/OnBordingView.dart';
+import 'package:tewseela_app/features/Notifications/ui/screen/Notifications_Screen.dart';
 
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -25,7 +32,25 @@ class AppRouter {
         return _buildRoute(const LoginScreen(), settings);
 
       case Routes.homeScreen:
-        return _buildRoute(const HomeScreen(), settings); // Use fade transition here
+        return _buildRoute(const HomeScreen(), settings);
+        
+      case Routes.carScreen:
+        return _buildRoute(const CarScreen(), settings);
+
+      case Routes.notificationScreen:
+        return _buildRoute(const NotificationScreen(), settings);
+
+      case Routes.onboardingScreen:
+        return _buildRoute(const OnboardingScreen(), settings);
+
+      case Routes.tripScreen:
+        return _buildRoute(const Tripscreen(), settings);
+
+      case Routes.profileScreen:
+        return _buildRoute(const ProfileScreen(), settings);
+
+      case Routes.bottomNavBar:
+        return _buildRoute(BottomNavBar(), settings);
 
       default:
         return null;

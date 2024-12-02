@@ -1,7 +1,9 @@
-// // import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:tewseela_app/features/trip/ui/widget/CusomAppBarTrip.dart';
+import 'package:tewseela_app/core/utils/colors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tewseela_app/features/trip/ui/widget/CusomCardTrip.dart';
+import 'package:tewseela_app/features/trip/ui/widget/CusomAppBarTrip.dart';
+// // import 'dart:math';
 
 
 class Tripscreen extends StatelessWidget {
@@ -35,20 +37,24 @@ class Tripscreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: ColorManager.mainWhite,
+        automaticallyImplyLeading: false,
         title: const CusomAppBarTrip(),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 8),
-        child: ListView.builder(
-          itemCount: trips.length, // عدد العناصر في القائمة
-          itemBuilder: (context, index) {
-            return CusomCardTrip(
-              fromTripName: trips[index]['fromTripName'] as String,
-              toTripName: trips[index]['toTripName'] as String,
-              tripDate: trips[index]['tripDate'] as String,
-              priceTrip: trips[index]['priceTrip'] as String,
-            );
-          },
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.only(right: 30.w, left: 30.w, top: 10.h),
+          child: ListView.builder(
+            itemCount: trips.length, // عدد العناصر في القائمة
+            itemBuilder: (context, index) {
+              return CusomCardTrip(
+                fromTripName: trips[index]['fromTripName'] as String,
+                toTripName: trips[index]['toTripName'] as String,
+                tripDate: trips[index]['tripDate'] as String,
+                priceTrip: trips[index]['priceTrip'] as String,
+              );
+            },
+          ),
         ),
       ),
     );

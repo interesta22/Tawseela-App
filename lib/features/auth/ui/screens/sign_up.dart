@@ -183,7 +183,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       textStyle: FontManager.font15WhiteMedium,
                       backgroundColor: ColorManager.mainBlack,
                       onPressed: () {
-                        context.pushNamed(Routes.homeScreen);
+                        context.pushNamed(Routes.bottomNavBar);
                       },
                     )
                   ],

@@ -1,6 +1,7 @@
-
 import 'package:flutter/material.dart';
+import 'package:tewseela_app/core/helpers/spacing.dart';
 import 'package:tewseela_app/core/constants/app_text_styles.dart';
+
 
 class CusomAppBarTrip extends StatelessWidget {
   const CusomAppBarTrip({
@@ -9,20 +10,14 @@ class CusomAppBarTrip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        Text(
+        const Text(
           ' رحلاتي',
           style: AppTextStyles.AppbarTittel,
         ),
-        SizedBox(
-          width: 10,
-        ),
-        Icon(
-          Icons.arrow_forward_ios_outlined,
-          color: Colors.black,
-        )
+        horizentalSpacing(10),
       ],
     );
   }

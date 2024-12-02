@@ -26,6 +26,7 @@ class CarScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const CusomAppBarCar(),
       ),
       body: Padding(

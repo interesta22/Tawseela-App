@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:tewseela_app/core/utils/fonts.dart';
+import 'package:tewseela_app/core/utils/colors.dart';
+import 'package:tewseela_app/core/routing/routs.dart';
+import 'package:tewseela_app/core/helpers/extensions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tewseela_app/core/constants/app_colors.dart';
+import 'package:tewseela_app/core/widgets/custom_button.dart';
 import 'package:tewseela_app/core/constants/app_text_styles.dart';
 
 
@@ -22,7 +28,7 @@ class CusomeContainerCar extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Container(
         padding: const EdgeInsets.all(16),
-        height: 150,
+        height: 160.h,
         width: double.infinity,
         decoration: BoxDecoration(
           color: AppColors.primaryColor,
@@ -46,21 +52,13 @@ class CusomeContainerCar extends StatelessWidget {
                 const SizedBox(
                   height: 30,
                 ),
-                Container(
-                  width: double.infinity,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: AppColors.backgroundColor,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      'تأكيد',
-                      style: AppTextStyles.buttonTextcar,
-                    ),
-                  ),
-                )
+                CustomButton(
+                    backgroundColor: ColorManager.mainWhite,
+                    buttonText: 'تأكيد',
+                    textStyle: FontManager.font15BlueMedium,
+                    onPressed: () {
+                      context.pushNamed(Routes.tripScreen);
+                    })
               ],
             ),
             Positioned(

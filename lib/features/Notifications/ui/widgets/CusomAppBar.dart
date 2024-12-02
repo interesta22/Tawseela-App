@@ -1,5 +1,6 @@
-
 import 'package:flutter/material.dart';
+import 'package:tewseela_app/core/helpers/spacing.dart';
+
 
 class CusomAppBar extends StatelessWidget {
   const CusomAppBar({
@@ -12,17 +13,7 @@ class CusomAppBar extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         const Text('الاشعارات'),
-        const SizedBox(
-          width: 20,
-        ),
-        IconButton(
-          onPressed: () {
-            // Navigator.pop(context);
-          },
-          icon: const Icon(
-            Icons.arrow_forward_ios,
-          ),
-        ),
+        horizentalSpacing(10),
       ],
     );
   }

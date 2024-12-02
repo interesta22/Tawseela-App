@@ -1,9 +1,9 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tewseela_app/core/constants/app_colors.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tewseela_app/core/constants/app_text_styles.dart';
+
 
 
 class CusomCardTrip extends StatelessWidget {
@@ -22,7 +22,7 @@ class CusomCardTrip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(bottom: 8.0),
       child: Container(
         height: 220,
         width: double.infinity,

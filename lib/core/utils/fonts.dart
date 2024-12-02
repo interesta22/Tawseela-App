@@ -39,4 +39,10 @@ class FontManager{
       fontSize: 15.sp,
       color: ColorManager.mainWhite,
       fontWeight: FontWeightHelper.medium);
+
+  static TextStyle font15BlueMedium = TextStyle(
+      fontFamily: 'Alexandria',
+      fontSize: 15.sp,
+      color: ColorManager.mainColor,
+      fontWeight: FontWeightHelper.medium);
 }

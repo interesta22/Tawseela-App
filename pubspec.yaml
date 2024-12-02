@@ -2,7 +2,7 @@ name: tewseela_app
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -30,6 +30,7 @@ environment:
 dependencies:
   animated_custom_dropdown: ^3.1.1
   awesome_snackbar_content: ^0.1.4
+  bloc: ^8.1.4
   country_flags: ^3.0.0
   cupertino_icons: ^1.0.8
   firebase_auth: ^5.3.2
@@ -39,8 +40,10 @@ dependencies:
   flutter_bloc: ^8.1.6
   flutter_screenutil: ^5.9.3
   font_awesome_flutter: ^10.8.0
+  hugeicons: ^0.0.7
   modal_progress_hud_nsn: ^0.5.1
   quickalert: ^1.1.0
+  salomon_bottom_bar: ^3.3.2
   shared_preferences: ^2.3.2
 
 dev_dependencies:
@@ -52,7 +55,6 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter packages.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tewseela_app/core/constants/snackbar.dart';
 import 'package:tewseela_app/core/constants/app_colors.dart';
 import 'package:tewseela_app/core/constants/app_text_styles.dart';
-import 'package:tewseela_app/core/constants/snackbar.dart';
 
 // import 'package:tawssela2_app/feature/Notifications/ui/widgets/custom_snackbar.dart'; // استيراد الكلاس
 
