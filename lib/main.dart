@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         theme: _buildAppTheme(),
         debugShowCheckedModeBanner: false,
-        initialRoute: Routes.phoneScreen,
+        initialRoute: Routes.onboardingScreen,
         onGenerateRoute: AppRouter().generateRoute,
       ),
     );

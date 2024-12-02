@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tewseela_app/core/routing/routs.dart';
 import 'package:tewseela_app/features/auth/ui/screens/otp.dart';
 import 'package:tewseela_app/features/home/ui/screens/home.dart';
 import 'package:tewseela_app/features/auth/ui/screens/phone.dart';
 import 'package:tewseela_app/features/auth/ui/screens/login.dart';
 import 'package:tewseela_app/features/auth/ui/screens/sign_up.dart';
-import 'package:tewseela_app/features/onbording/ui/widgets/onb1.dart';
 import 'package:tewseela_app/features/trip/ui/screen/TripScreen.dart';
 import 'package:tewseela_app/features/profile/ui/screens/profile.dart';
 import 'package:tewseela_app/features/Cars/ui/screen/Cars_Screen.dart';
 import 'package:tewseela_app/features/home/ui/widgets/bottom_nav_bar.dart';
-import 'package:tewseela_app/features/onbording/ui/screens/OnBordingView.dart';
+import 'package:tewseela_app/features/onboarding/ui/screens/onboarding.dart';
 import 'package:tewseela_app/features/Notifications/ui/screen/Notifications_Screen.dart';
 
 class AppRouter {

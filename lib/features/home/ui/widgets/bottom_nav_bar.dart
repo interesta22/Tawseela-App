@@ -41,50 +41,53 @@ class _BottomNavBarState extends State<BottomNavBar> {
             );
           },
         ),
-        bottomNavigationBar: BlocBuilder<BottomNavCubit, int>(
-          builder: (context, currentIndex) {
-            return SalomonBottomBar(
-              backgroundColor: ColorManager.mainWhite,
-              selectedItemColor: ColorManager.mainColor,
-              unselectedItemColor: const Color(0xff757575),
-              currentIndex: currentIndex,
-              onTap: (index) {
-                // تحديث الحالة عند النقر
-                _pageController.jumpToPage(index);
-                context.read<BottomNavCubit>().changeTab(index);
-              },
-              items: [
-                SalomonBottomBarItem(
-                  icon: const Icon(HugeIcons.strokeRoundedHome03),
-                  title: const Text(
-                    'الرئيسية',
-                    style: TextStyle(fontFamily: 'Alexandria'),
+        bottomNavigationBar: Directionality(
+          textDirection: TextDirection.rtl, // اجعل الاتجاه من اليمين إلى اليسار
+          child: BlocBuilder<BottomNavCubit, int>(
+            builder: (context, currentIndex) {
+              return SalomonBottomBar(
+                backgroundColor: ColorManager.mainWhite,
+                selectedItemColor: ColorManager.mainColor,
+                unselectedItemColor: const Color(0xff757575),
+                currentIndex: currentIndex,
+                onTap: (index) {
+                  // تحديث الحالة عند النقر
+                  _pageController.jumpToPage(index);
+                  context.read<BottomNavCubit>().changeTab(index);
+                },
+                items: [
+                  SalomonBottomBarItem(
+                    icon: const Icon(HugeIcons.strokeRoundedHome03),
+                    title: const Text(
+                      'الرئيسية',
+                      style: TextStyle(fontFamily: 'Alexandria'),
+                    ),
                   ),
-                ),
-                SalomonBottomBarItem(
-                  icon: const Icon(HugeIcons.strokeRoundedCar04),
-                  title: const Text(
-                    'رحلاتي',
-                    style: TextStyle(fontFamily: 'Alexandria'),
+                  SalomonBottomBarItem(
+                    icon: const Icon(HugeIcons.strokeRoundedCar04),
+                    title: const Text(
+                      'رحلاتي',
+                      style: TextStyle(fontFamily: 'Alexandria'),
+                    ),
                   ),
-                ),
-                SalomonBottomBarItem(
-                  icon: const Icon(HugeIcons.strokeRoundedNotification03),
-                  title: const Text(
-                    'الاشعارات',
-                    style: TextStyle(fontFamily: 'Alexandria'),
+                  SalomonBottomBarItem(
+                    icon: const Icon(HugeIcons.strokeRoundedNotification03),
+                    title: const Text(
+                      'الاشعارات',
+                      style: TextStyle(fontFamily: 'Alexandria'),
+                    ),
                   ),
-                ),
-                SalomonBottomBarItem(
-                  icon: const Icon(HugeIcons.strokeRoundedUser),
-                  title: const Text(
-                    'ملفي',
-                    style: TextStyle(fontFamily: 'Alexandria'),
+                  SalomonBottomBarItem(
+                    icon: const Icon(HugeIcons.strokeRoundedUser),
+                    title: const Text(
+                      'ملفي',
+                      style: TextStyle(fontFamily: 'Alexandria'),
+                    ),
                   ),
-                ),
-              ],
-            );
-          },
+                ],
+              );
+            },
+          ),
         ),
       ),
     );

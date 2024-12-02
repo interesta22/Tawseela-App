@@ -45,6 +45,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                         hintText: 'رقم الهاتف',
                         isEnabled: true,
                         controller: _phoneController,
+                        // ignore: body_might_complete_normally_nullable
                         validator: (value) {}),
                     verticaalSpacing(20),
                     CustomButton(
