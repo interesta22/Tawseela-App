@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:tewseela_app/core/helpers/extensions.dart';
 import 'package:tewseela_app/core/constants/app_text_styles.dart';
 
-class CusomAppBarCar extends StatelessWidget {
-  const CusomAppBarCar({
-    super.key,
+class CustomAppBar extends StatelessWidget {
+  final String title;
+  const CustomAppBar({
+    super.key, required this.title,
   });
 
   @override
@@ -13,7 +14,7 @@ class CusomAppBarCar extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Text(
-          'السيارات المتاحة للرحلة',
+          title,
           style: AppTextStyles.titelNoti,
         ),
         IconButton(

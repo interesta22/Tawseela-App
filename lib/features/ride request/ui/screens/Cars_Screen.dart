@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tewseela_app/features/Cars/ui/widget/CusomAppBarCar.dart';
-import 'package:tewseela_app/features/Cars/ui/widget/CusomeContainerCar.dart';
+import 'package:tewseela_app/core/widgets/CusomAppBarCar.dart';
+import 'package:tewseela_app/features/ride%20request/ui/widgets/CusomeContainerCar.dart';
 
 
 class CarScreen extends StatelessWidget {
@@ -27,7 +27,7 @@ class CarScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const CusomAppBarCar(),
+        title: const CustomAppBar(title: 'السيارات المتاحة للرحلة',),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

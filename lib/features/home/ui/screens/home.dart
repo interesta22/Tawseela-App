@@ -3,7 +3,9 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:tewseela_app/core/utils/fonts.dart';
 import 'package:tewseela_app/core/utils/colors.dart';
+import 'package:tewseela_app/core/routing/routs.dart';
 import 'package:tewseela_app/core/helpers/spacing.dart';
+import 'package:tewseela_app/core/helpers/extensions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tewseela_app/core/widgets/custom_button.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -40,22 +42,25 @@ class _HomeScreenState extends State<HomeScreen> {
                 verticaalSpacing(20),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10.w),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 15.w),
-                    height: 60.h,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      color: Colors.grey.withOpacity(0.3),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Icon(HugeIcons.strokeRoundedLocation05),
-                        Text(
-                          'رايح فين؟',
-                          style: FontManager.font18BlackRegular,
-                        ),
-                      ],
+                  child: GestureDetector(
+                    onTap: (){context.pushNamed(Routes.trackLocation);},
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 15.w),
+                      height: 60.h,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: Colors.grey.withOpacity(0.3),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Icon(HugeIcons.strokeRoundedLocation05),
+                          Text(
+                            'رايح فين؟',
+                            style: FontManager.font18BlackRegular,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

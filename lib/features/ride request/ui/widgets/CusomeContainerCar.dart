@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tewseela_app/core/constants/app_colors.dart';
 import 'package:tewseela_app/core/widgets/custom_button.dart';
 import 'package:tewseela_app/core/constants/app_text_styles.dart';
+import 'package:tewseela_app/features/ride%20request/ui/screens/drivers.dart';
 
 
 class CusomeContainerCar extends StatelessWidget {
@@ -57,7 +58,7 @@ class CusomeContainerCar extends StatelessWidget {
                     buttonText: 'تأكيد',
                     textStyle: FontManager.font15BlueMedium,
                     onPressed: () {
-                      context.pushNamed(Routes.tripScreen);
+                      context.pushNamed(Routes.driversScreen);
                     })
               ],
             ),

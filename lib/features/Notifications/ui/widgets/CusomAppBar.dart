@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:tewseela_app/core/helpers/spacing.dart';
-
+import 'package:tewseela_app/core/constants/app_text_styles.dart';
 
 class CusomAppBar extends StatelessWidget {
+  final String title;
   const CusomAppBar({
-    super.key,
+    super.key, required this.title,
   });
 
   @override
@@ -12,7 +13,7 @@ class CusomAppBar extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        const Text('الاشعارات'),
+        Text(title, style: AppTextStyles.AppbarTittel),
         horizentalSpacing(10),
       ],
     );

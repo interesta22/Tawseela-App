@@ -24,7 +24,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: ColorManager.mainWhite,
-          title: const CusomAppBar(),
+          title: const CusomAppBar(title: 'الاشعارات',),
           titleTextStyle: AppTextStyles.AppbarTittel,
         ),
         body: SafeArea(

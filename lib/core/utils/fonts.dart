@@ -46,6 +46,12 @@ class FontManager{
       color: ColorManager.mainWhite,
       fontWeight: FontWeightHelper.medium);
 
+  static TextStyle font16WhiteSemibold = TextStyle(
+      fontFamily: 'Alexandria',
+      fontSize: 15.sp,
+      color: ColorManager.mainWhite,
+      fontWeight: FontWeightHelper.semiBold);
+
   static TextStyle font21WhiteMedium = TextStyle(
       fontFamily: 'Alexandria',
       fontSize: 21.sp,

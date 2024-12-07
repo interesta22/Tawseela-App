@@ -7,9 +7,11 @@ import 'package:tewseela_app/features/auth/ui/screens/login.dart';
 import 'package:tewseela_app/features/auth/ui/screens/sign_up.dart';
 import 'package:tewseela_app/features/trip/ui/screen/TripScreen.dart';
 import 'package:tewseela_app/features/profile/ui/screens/profile.dart';
-import 'package:tewseela_app/features/Cars/ui/screen/Cars_Screen.dart';
 import 'package:tewseela_app/features/home/ui/widgets/bottom_nav_bar.dart';
 import 'package:tewseela_app/features/onboarding/ui/screens/onboarding.dart';
+import 'package:tewseela_app/features/ride%20request/ui/screens/drivers.dart';
+import 'package:tewseela_app/features/ride%20request/ui/screens/Cars_Screen.dart';
+import 'package:tewseela_app/features/ride%20request/ui/screens/track_location.dart';
 import 'package:tewseela_app/features/Notifications/ui/screen/Notifications_Screen.dart';
 
 class AppRouter {
@@ -21,10 +23,10 @@ class AppRouter {
         return _buildRoute(PhoneAuthScreen(), settings);
 
       case Routes.otpScreen:
-        return _buildRoute(OtpScreen(), settings);
+        return _buildRoute(const OtpScreen(), settings);
 
       case Routes.signupScreen:
-        return _buildRoute(SignupScreen(), settings); // Use fade transition here
+        return _buildRoute(const SignupScreen(), settings); // Use fade transition here
 
       case Routes.loginScreen:
         return _buildRoute(const LoginScreen(), settings);
@@ -48,7 +50,13 @@ class AppRouter {
         return _buildRoute(const ProfileScreen(), settings);
 
       case Routes.bottomNavBar:
-        return _buildRoute(BottomNavBar(), settings);
+        return _buildRoute(const BottomNavBar(), settings);
+
+      case Routes.trackLocation:
+        return _buildRoute(const TrackLocation(), settings);
+
+      case Routes.driversScreen:
+        return _buildRoute(DriversScreen(), settings);
 
       default:
         return null;
@@ -60,7 +68,7 @@ class AppRouter {
       pageBuilder: (context, animation, secondaryAnimation) => page,
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         return SlideTransition(
-          position: Tween<Offset>(begin: Offset(1.0, 0.0), end: Offset.zero)
+          position: Tween<Offset>(begin: const Offset(1.0, 0.0), end: Offset.zero)
               .animate(animation),
           child: FadeTransition(
             opacity: animation,
