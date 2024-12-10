@@ -116,6 +116,97 @@ class AppTextStyles {
     fontSize: 18,
     // fontWeight: FontWeight.bold,
   );
+  static const TextStyle paymentmthod = TextStyle(
+    fontSize: 18.0,
+    fontFamily: 'Alexandria',
+    fontWeight: FontWeight.normal,
+    color: AppColors.thirdColor,
+  );
+  static const TextStyle buttonTextpayment = TextStyle(
+    color: AppColors.backgroundColor,
+    fontFamily: 'Alexandria',
+    fontSize: 18,
+    // fontWeight: FontWeight.bold,
+  );
+
+  static TextStyle paymntText1 = TextStyle(
+    fontSize: 18.0,
+    fontFamily: 'Alexandria',
+    fontWeight: FontWeight.normal,
+    color: AppColors.greyColor,
+  );
+  static const TextStyle paymntText2 = TextStyle(
+    fontSize: 12.0,
+    fontFamily: 'Alexandria',
+    fontWeight: FontWeight.normal,
+    color: AppColors.thirdColor,
+  );
+  static const TextStyle titelpayment = TextStyle(
+    fontSize: 20.0,
+    fontFamily: 'Alexandria',
+    fontWeight: FontWeight.bold,
+    color: AppColors.thirdColor,
+  );
+  static const priceTrip = TextStyle(
+    fontSize: 18.0,
+    fontFamily: 'Alexandria',
+    fontWeight: FontWeight.bold,
+    color: AppColors.thirdColor,
+  );
+  static const priceValu = TextStyle(
+    fontSize: 18.0,
+    fontFamily: 'Alexandria',
+    fontWeight: FontWeight.bold,
+    color: AppColors.thirdColor,
+  );
+  static const discount = TextStyle(
+    fontSize: 18.0,
+    fontFamily: 'Alexandria',
+    fontWeight: FontWeight.bold,
+    color: Colors.red,
+  );
+  static const discountValu = TextStyle(
+    fontSize: 18.0,
+    fontFamily: 'Alexandria',
+    fontWeight: FontWeight.bold,
+    color: Colors.red,
+  );
+  static const totalPrice = TextStyle(
+    fontSize: 18.0,
+    fontFamily: 'Alexandria',
+    fontWeight: FontWeight.bold,
+    color: AppColors.primaryColor,
+  );
+  static const code = TextStyle(
+    fontSize: 14.0,
+    fontFamily: 'Alexandria',
+    fontWeight: FontWeight.bold,
+    color: AppColors.backgroundColor,
+  );
+  static var titleFildCode = TextStyle(
+    fontSize: 16.0,
+    fontFamily: 'Alexandria',
+    fontWeight: FontWeight.normal,
+    color: AppColors.greyColor,
+  );
+    static const endtext1 = TextStyle(
+    fontSize: 28.0,
+    fontFamily: 'Alexandria',
+    fontWeight: FontWeight.bold,
+    color: AppColors.primaryColor,
+  );
+  static const endtext2 = TextStyle(
+    fontSize: 20.0,
+    fontFamily: 'Alexandria',
+    fontWeight: FontWeight.w400,
+    color: AppColors.scondeColor,
+  );
+   static const endbuttom = TextStyle(
+    fontSize: 18.0,
+    fontFamily: 'Alexandria',
+    fontWeight: FontWeight.w300,
+    color: AppColors.backgroundColor,
+  );
 
   // static const TextStyle caption = TextStyle(
   //   fontSize: 12.0,
