@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tewseela_app/core/routing/routs.dart';
 import 'package:tewseela_app/features/auth/ui/screens/otp.dart';
 import 'package:tewseela_app/features/home/ui/screens/home.dart';
@@ -7,6 +8,7 @@ import 'package:tewseela_app/features/auth/ui/screens/login.dart';
 import 'package:tewseela_app/features/auth/ui/screens/sign_up.dart';
 import 'package:tewseela_app/features/trip/ui/screen/TripScreen.dart';
 import 'package:tewseela_app/features/profile/ui/screens/profile.dart';
+import 'package:tewseela_app/features/auth/logic/cubit/auth_cubit.dart';
 import 'package:tewseela_app/features/home/ui/widgets/bottom_nav_bar.dart';
 import 'package:tewseela_app/features/onboarding/ui/screens/onboarding.dart';
 import 'package:tewseela_app/features/ride%20request/ui/screens/drivers.dart';
@@ -20,22 +22,25 @@ class AppRouter {
       // case Routes.onBoardingScreen:
       //   return _buildRoute(const OnboardingScreen(), settings);
       case Routes.phoneScreen:
-        return _buildRoute(PhoneAuthScreen(), settings);
-
-      case Routes.otpScreen:
-        return _buildRoute(const OtpScreen(), settings);
-
-      case Routes.signupScreen:
-        return _buildRoute(const SignupScreen(), settings); // Use fade transition here
-
+        return _buildRoute(
+            BlocProvider(
+              create: (context) => AuthCubit(),
+              child: PhoneAuthScreen(),
+            ),
+            settings);
+            
       case Routes.loginScreen:
         return _buildRoute(const LoginScreen(), settings);
 
       case Routes.homeScreen:
         return _buildRoute(const HomeScreen(), settings);
-        
+
       case Routes.carScreen:
-        return _buildRoute(const CarScreen(), settings);
+        // تأكد من وجود القيم المطلوبة هنا
+        
+        final arguments = settings.arguments as Map<String, String>;
+
+        return _buildRoute(CarScreen(arguments: arguments),settings);
 
       case Routes.notificationScreen:
         return _buildRoute(const NotificationScreen(), settings);
@@ -56,7 +61,10 @@ class AppRouter {
         return _buildRoute(const TrackLocation(), settings);
 
       case Routes.driversScreen:
-        return _buildRoute(DriversScreen(), settings);
+        final arguments =
+            settings.arguments as Map<String, String>; // استخرج اسم السيارة من arguments
+        return _buildRoute(DriversScreen(arguments: arguments,), settings);
+
 
       default:
         return null;
@@ -68,8 +76,9 @@ class AppRouter {
       pageBuilder: (context, animation, secondaryAnimation) => page,
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         return SlideTransition(
-          position: Tween<Offset>(begin: const Offset(1.0, 0.0), end: Offset.zero)
-              .animate(animation),
+          position:
+              Tween<Offset>(begin: const Offset(1.0, 0.0), end: Offset.zero)
+                  .animate(animation),
           child: FadeTransition(
             opacity: animation,
             child: ScaleTransition(

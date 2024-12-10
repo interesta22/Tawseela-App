@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tewseela_app/core/utils/fonts.dart';
 import 'package:tewseela_app/core/utils/colors.dart';
 import 'package:tewseela_app/core/routing/routs.dart';
 import 'package:tewseela_app/core/helpers/extensions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:tewseela_app/features/auth/logic/cubit/auth_cubit.dart';
+import 'package:tewseela_app/features/onboarding/logic/onboarding_cubit.dart';
 import 'package:tewseela_app/features/onboarding/ui/widgets/onboarding_item.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -32,6 +35,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final onboardingCubit = context.read<OnboardingCubit>();
     return Scaffold(
       body: Stack(
         children: [
@@ -96,7 +100,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
             ),
           // زر ابدأ
-
+    
           Positioned(
             child: Image.asset('assets/images/Shape 1.png'),
           ),
@@ -111,7 +115,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               left: 20.w,
               right: 20.w,
               child: ElevatedButton(
-                onPressed: () {
+                onPressed: () async{
+                  await onboardingCubit.onboardingSeen();
                   context.pushNamed(Routes.phoneScreen);
                 },
                 style: ElevatedButton.styleFrom(

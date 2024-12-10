@@ -41,48 +41,51 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBCysXrh4irGYZGa7d0r58f16stcKv3gKg',
-    appId: '1:220376217037:web:7aef48467ee3abd173c084',
-    messagingSenderId: '220376217037',
-    projectId: 'tawseela-app-e5922',
-    authDomain: 'tawseela-app-e5922.firebaseapp.com',
-    storageBucket: 'tawseela-app-e5922.firebasestorage.app',
-    measurementId: 'G-KLW00SLMC3',
+    apiKey: 'AIzaSyAbCy4DtMr7tyy-eLxX2ns57DwQknuB7Aw',
+    appId: '1:237711896721:web:23fc9533d00e3485398f30',
+    messagingSenderId: '237711896721',
+    projectId: 'dead-bot-app',
+    authDomain: 'dead-bot-app.firebaseapp.com',
+    storageBucket: 'dead-bot-app.appspot.com',
+    measurementId: 'G-SEVLRLZBQP',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDL_E71e_CynJxfcIj5UvOacdP8pV2onJ4',
-    appId: '1:220376217037:android:372642d29ba9263973c084',
-    messagingSenderId: '220376217037',
-    projectId: 'tawseela-app-e5922',
-    storageBucket: 'tawseela-app-e5922.firebasestorage.app',
+    apiKey: 'AIzaSyCr5da7OVD7I2lcGuqFZr2cUW2PGYkat5M',
+    appId: '1:237711896721:android:436d5421205fae42398f30',
+    messagingSenderId: '237711896721',
+    projectId: 'dead-bot-app',
+    storageBucket: 'dead-bot-app.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAVpZmc4xG71RPnsVP1RCldGYLBwJNwtDo',
-    appId: '1:220376217037:ios:4196520b2fce087873c084',
-    messagingSenderId: '220376217037',
-    projectId: 'tawseela-app-e5922',
-    storageBucket: 'tawseela-app-e5922.firebasestorage.app',
+    apiKey: 'AIzaSyAjUzw53L4NRD9nheIQ-pJ26zWYub5oMek',
+    appId: '1:237711896721:ios:d87b77e04454fc70398f30',
+    messagingSenderId: '237711896721',
+    projectId: 'dead-bot-app',
+    storageBucket: 'dead-bot-app.appspot.com',
+    androidClientId: '237711896721-m1tt1ti8s8j10t2j06c22h5vsdk4ejdu.apps.googleusercontent.com',
     iosBundleId: 'com.example.tewseelaApp',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyAVpZmc4xG71RPnsVP1RCldGYLBwJNwtDo',
-    appId: '1:220376217037:ios:4196520b2fce087873c084',
-    messagingSenderId: '220376217037',
-    projectId: 'tawseela-app-e5922',
-    storageBucket: 'tawseela-app-e5922.firebasestorage.app',
+    apiKey: 'AIzaSyAjUzw53L4NRD9nheIQ-pJ26zWYub5oMek',
+    appId: '1:237711896721:ios:d87b77e04454fc70398f30',
+    messagingSenderId: '237711896721',
+    projectId: 'dead-bot-app',
+    storageBucket: 'dead-bot-app.appspot.com',
+    androidClientId: '237711896721-m1tt1ti8s8j10t2j06c22h5vsdk4ejdu.apps.googleusercontent.com',
     iosBundleId: 'com.example.tewseelaApp',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyBCysXrh4irGYZGa7d0r58f16stcKv3gKg',
-    appId: '1:220376217037:web:743b815ab71aab3973c084',
-    messagingSenderId: '220376217037',
-    projectId: 'tawseela-app-e5922',
-    authDomain: 'tawseela-app-e5922.firebaseapp.com',
-    storageBucket: 'tawseela-app-e5922.firebasestorage.app',
-    measurementId: 'G-Z8M4DQBKQB',
+    apiKey: 'AIzaSyAbCy4DtMr7tyy-eLxX2ns57DwQknuB7Aw',
+    appId: '1:237711896721:web:72b74c3622f9c038398f30',
+    messagingSenderId: '237711896721',
+    projectId: 'dead-bot-app',
+    authDomain: 'dead-bot-app.firebaseapp.com',
+    storageBucket: 'dead-bot-app.appspot.com',
+    measurementId: 'G-2YCEH70WNN',
   );
+
 }

@@ -106,6 +106,18 @@ class FontManager{
       color: ColorManager.mainBlack,
       fontWeight: FontWeightHelper.bold);
 
+  static TextStyle font14GreenRegular = TextStyle(
+      fontFamily: 'Alexandria',
+      fontSize: 12.sp,
+      color: Colors.green,
+      fontWeight: FontWeightHelper.regular);
+
+  static TextStyle font14RedRegular = TextStyle(
+      fontFamily: 'Alexandria',
+      fontSize: 12.sp,
+      color: Colors.red,
+      fontWeight: FontWeightHelper.regular);
+
 //   static TextStyle font15BlueSemiBold = TextStyle(
 //       fontFamily: 'Alexandria',
 //       fontSize: 15.sp,

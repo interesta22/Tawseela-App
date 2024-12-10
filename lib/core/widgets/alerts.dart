@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tewseela_app/core/utils/fonts.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 
 class Alerts {
@@ -12,6 +13,8 @@ class Alerts {
       behavior: SnackBarBehavior.floating,
       backgroundColor: Colors.transparent,
       content: AwesomeSnackbarContent(
+        messageTextStyle: FontManager.font15WhiteMedium,
+        titleTextStyle: FontManager.font16WhiteSemibold,
         title: title,
         message: message,
         contentType: ContentType.success,
@@ -33,6 +36,8 @@ class Alerts {
       behavior: SnackBarBehavior.floating,
       backgroundColor: Colors.transparent,
       content: AwesomeSnackbarContent(
+        messageTextStyle: FontManager.font15WhiteMedium,
+        titleTextStyle: FontManager.font16WhiteSemibold,
         title: title,
         message: message,
         contentType: ContentType.failure,

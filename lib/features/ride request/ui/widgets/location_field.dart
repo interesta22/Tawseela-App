@@ -4,8 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LocationField extends StatelessWidget {
   final String title;
+  final TextEditingController? controller;
   const LocationField({
-    super.key, required this.title,
+    super.key,
+    required this.title,
+    this.controller,
   });
 
   @override
@@ -13,11 +16,13 @@ class LocationField extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 10.w),
       child: TextField(
+        readOnly: true,
+        controller: controller,
         textDirection: TextDirection.rtl,
         decoration: InputDecoration(
           hintTextDirection: TextDirection.rtl,
           hintText: title,
-          hintStyle: FontManager.font18BlackRegular,
+          hintStyle: FontManager.font16BlackLight,
           filled: true,
           fillColor: Colors.white,
           border: OutlineInputBorder(
@@ -27,7 +32,7 @@ class LocationField extends StatelessWidget {
           contentPadding:
               EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.h),
         ),
-        style: FontManager.font18BlackRegular,
+        style: FontManager.font16BlackLight,
       ),
     );
   }

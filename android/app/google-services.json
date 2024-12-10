@@ -1,26 +1,43 @@
 {
   "project_info": {
-    "project_number": "220376217037",
-    "project_id": "tawseela-app-e5922",
-    "storage_bucket": "tawseela-app-e5922.firebasestorage.app"
+    "project_number": "237711896721",
+    "project_id": "dead-bot-app",
+    "storage_bucket": "dead-bot-app.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:220376217037:android:372642d29ba9263973c084",
+        "mobilesdk_app_id": "1:237711896721:android:436d5421205fae42398f30",
         "android_client_info": {
           "package_name": "com.example.tewseela_app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "237711896721-tgknef2vc65u76411uacu8ilslihrdrm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyDL_E71e_CynJxfcIj5UvOacdP8pV2onJ4"
+          "current_key": "AIzaSyCr5da7OVD7I2lcGuqFZr2cUW2PGYkat5M"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "237711896721-tgknef2vc65u76411uacu8ilslihrdrm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "237711896721-1u5skdmpm3qnmrlg09t42qkejglvn8pb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.deadBot"
+              }
+            }
+          ]
         }
       }
     }

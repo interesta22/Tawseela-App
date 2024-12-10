@@ -14,18 +14,26 @@ class DriverCard extends StatelessWidget {
     Key? key,
     required this.name,
     required this.rating,
-    required this.isOnline, // إضافة خاصية للتحقق من حالة السائق
+    required this.isOnline,
+    required this.img,
+    required this.from,
+    required this.to,
+    required this.dis, required this.price,
   }) : super(key: key);
 
   final String name;
+  final String img;
   final String rating;
-  final String isOnline; // خاصية لتحديد حالة الاتصال
+  final String isOnline;
+  final String from;
+  final String to;
+  final String dis;
+  final String price;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // عند الضغط على الكارد، يتم عرض نافذة BottomSheet
         showModalBottomSheet(
           context: context,
           backgroundColor: Colors.white,
@@ -33,6 +41,10 @@ class DriverCard extends StatelessWidget {
             borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
           ),
           builder: (BuildContext context) {
+            double distanceInDouble = double.parse(dis); // تحويل النص إلى رقم
+            double time = distanceInDouble * 2.5..toStringAsFixed(2);
+            String fare = (20 + (double.parse(dis) * double.parse(price)) + (time * 0.5)).toStringAsFixed(2);
+
             return Padding(
               padding: EdgeInsets.symmetric(horizontal: 10.w),
               child: Container(
@@ -64,14 +76,12 @@ class DriverCard extends StatelessWidget {
                             color: ColorManager.mainWhite,
                           ),
                         ),
-                        const Expanded(
-                          child: SizedBox(),
-                        ),
+                        const Expanded(child: SizedBox()),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
-                              'ايجون تارجيريان',
+                              name,
                               style: FontManager.font18BlackRegular,
                             ),
                             Row(
@@ -82,7 +92,7 @@ class DriverCard extends StatelessWidget {
                                 ),
                                 horizentalSpacing(5),
                                 Text(
-                                  '4.4',
+                                  rating,
                                   style: FontManager.font18BlackRegular,
                                 ),
                               ],
@@ -92,16 +102,25 @@ class DriverCard extends StatelessWidget {
                         horizentalSpacing(15),
                         CircleAvatar(
                           radius: 25,
-                          child: Image.asset('assets/images/Oval 2.png'),
+                          child: Image.network(img),
                         ),
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Text(
-                          'العجمي - فضة',
-                          style: FontManager.font17BlackLight,
+                        Expanded(
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Text(
+                                from,
+                                style: FontManager.font17BlackLight,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ),
                         ),
                         IconButton(
                           onPressed: () {},
@@ -115,22 +134,32 @@ class DriverCard extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 25.w),
                       child: const Align(
-                          alignment: Alignment.centerRight,
-                          child: DottedLine(
-                            direction: Axis.vertical,
-                            lineLength: 30,
-                            dashLength: 4.0,
-                            dashGapLength: 4.0,
-                            dashColor: ColorManager.mainColor,
-                            lineThickness: 2.0,
-                          )),
+                        alignment: Alignment.centerRight,
+                        child: DottedLine(
+                          direction: Axis.vertical,
+                          lineLength: 30,
+                          dashLength: 4.0,
+                          dashGapLength: 4.0,
+                          dashColor: ColorManager.mainColor,
+                          lineThickness: 2.0,
+                        ),
+                      ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Text(
-                          'كفر الشيخ - مركز مطوبس',
-                          style: FontManager.font17BlackLight,
+                        Expanded(
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Text(
+                                to,
+                                style: FontManager.font17BlackLight,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ),
                         ),
                         IconButton(
                           onPressed: () {},
@@ -149,20 +178,20 @@ class DriverCard extends StatelessWidget {
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 10.w),
-                      child: const Row(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           InfoItem(
                             title: 'السعر',
-                            subitle: '170 ج.م',
+                            subitle: '$fare ج.م',
                           ),
                           InfoItem(
                             title: 'الوقت',
-                            subitle: '2 س',
+                            subitle: '$time د',
                           ),
                           InfoItem(
                             title: 'المسافة',
-                            subitle: '200 كم',
+                            subitle: '$dis كم',
                           ),
                         ],
                       ),
@@ -174,7 +203,7 @@ class DriverCard extends StatelessWidget {
                       onPressed: () {},
                       backgroundColor: ColorManager.mainBlack,
                     ),
-                    verticaalSpacing(15)
+                    verticaalSpacing(15),
                   ],
                 ),
               ),
@@ -182,75 +211,80 @@ class DriverCard extends StatelessWidget {
           },
         );
       },
-      child: Container(
-        height: 110.h,
-        margin: EdgeInsets.symmetric(vertical: 10.h),
-        padding: EdgeInsets.all(8.w),
-        decoration: BoxDecoration(
-          color: ColorManager.mainColor,
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Directionality(
-          textDirection: TextDirection.rtl,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              // مؤشر الحالة
-              
-              horizentalSpacing(10),
-              // الصورة
-              Container(
-                width: 70.w,
-                height: 70.h,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: const Color(0xFF979797).withOpacity(0.1),
-                  image: DecorationImage(
-                    image: AssetImage(
-                        'assets/images/Chill_guy_original_artwork.jpg'),
-                    fit: BoxFit.cover,
+      child: Padding(
+        padding: EdgeInsets.only(bottom: 10.h),
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: ColorManager.mainWhite,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Directionality(
+            textDirection: TextDirection.rtl,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: CircleAvatar(
+                    backgroundColor: ColorManager.mainColor,
+                    radius: 40,
+                    child: Image.network(img, fit: BoxFit.cover),
                   ),
                 ),
-              ),
-              horizentalSpacing(20),
-              // الاسم والتقييم
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    name,
-                    style: FontManager.font16WhiteSemibold,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  SizedBox(height: 12.h),
-                  Row(
+                SizedBox(width: 10.w),
+                Expanded(
+                  flex: 2,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        rating,
-                        style: FontManager.font15WhiteMedium,
+                        name,
+                        style: FontManager.font16BlackSemibold,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      horizentalSpacing(4),
-                      const Icon(
-                        Icons.star_rounded,
-                        color: Color(0xffFFCC00),
-                        size: 20,
+                      SizedBox(height: 12.h),
+                      Row(
+                        children: [
+                          Text(
+                            'التقييم :  $rating',
+                            style: FontManager.font13BlackSemibold,
+                          ),
+                          horizentalSpacing(4),
+                          const Icon(
+                            Icons.star_rounded,
+                            color: Color(0xffFFCC00),
+                            size: 20,
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                ],
-              ),
-              horizentalSpacing(130),
-              Container(
-                width: 10.w,
-                height: 10.h,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: isOnline == 'true'?Colors.green : Colors.red,
                 ),
-              ),
-            ],
+                SizedBox(width: 10.w),
+                Row(
+                  children: [
+                    Text(isOnline == 'true' ? 'متصل الآن' : 'غير متصل',
+                        style: isOnline == 'false'
+                            ? FontManager.font14RedRegular
+                            : FontManager.font14GreenRegular),
+                    horizentalSpacing(7),
+                    Container(
+                      width: 10.w, // عرض النقطة
+                      height: 10.h, // ارتفاع النقطة
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: isOnline == 'true'
+                            ? Colors.green
+                            : Colors.red, // نفس اللون للنقطة
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

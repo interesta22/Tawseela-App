@@ -9,28 +9,28 @@ import 'package:tewseela_app/core/widgets/custom_button.dart';
 import 'package:tewseela_app/core/constants/app_text_styles.dart';
 import 'package:tewseela_app/features/ride%20request/ui/screens/drivers.dart';
 
-
 class CusomeContainerCar extends StatelessWidget {
   final String carName;
   final String carColor;
-  final String carPrice;
+  final double carPrice;
   final String carImage;
+  final Map<String, String> arguments;
+
   const CusomeContainerCar({
     super.key,
     required this.carName,
     required this.carColor,
     required this.carPrice,
     required this.carImage,
+    required this.arguments,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: EdgeInsets.only(bottom: 10.h),
       child: Container(
         padding: const EdgeInsets.all(16),
-        height: 160.h,
-        width: double.infinity,
         decoration: BoxDecoration(
           color: AppColors.primaryColor,
           borderRadius: BorderRadius.circular(10),
@@ -41,34 +41,39 @@ class CusomeContainerCar extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  'سيارة $carName',
+                  carName,
                   style: AppTextStyles.carName,
                   maxLines: 1,
                   overflow: TextOverflow.clip,
                 ),
                 Text(
-                  'اللون :  $carColor |  الأجرة : $carPrice ج.م',
+                  'اللون : $carColor | الأجرة : ${carPrice.toStringAsFixed(2)} ج.م',
                   style: AppTextStyles.detilsCar,
                 ),
-                const SizedBox(
-                  height: 30,
-                ),
+                const SizedBox(height: 30),
                 CustomButton(
-                    backgroundColor: ColorManager.mainWhite,
-                    buttonText: 'تأكيد',
-                    textStyle: FontManager.font15BlueMedium,
-                    onPressed: () {
-                      context.pushNamed(Routes.driversScreen);
-                    })
+                  backgroundColor: ColorManager.mainWhite,
+                  buttonText: 'تأكيد',
+                  textStyle: FontManager.font15BlueMedium,
+                  onPressed: () {
+                    arguments['price'] = carPrice.toString();
+                    arguments['car'] = carName;
+                    context.pushNamed(
+                      Routes.driversScreen,
+                      arguments: arguments,
+                    );
+                  },
+                )
               ],
             ),
             Positioned(
               top: -35,
               left: 0,
-              child: Image.asset(
-                carImage, // مسار الصورة
+              child: Image.network(
+                fit: BoxFit.contain,
+                carImage,
                 width: 140,
-                height: 120,
+                height: 140,
               ),
             ),
           ],
