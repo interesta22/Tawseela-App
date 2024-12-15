@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:dotted_line/dotted_line.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:tewseela_app/core/utils/fonts.dart';
 import 'package:tewseela_app/core/utils/colors.dart';
+import 'package:tewseela_app/core/routing/routs.dart';
 import 'package:tewseela_app/core/helpers/spacing.dart';
+import 'package:tewseela_app/core/helpers/extensions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tewseela_app/core/widgets/custom_button.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -18,7 +21,10 @@ class DriverCard extends StatelessWidget {
     required this.img,
     required this.from,
     required this.to,
-    required this.dis, required this.price,
+    required this.dis,
+    required this.price,
+    required this.arguments,
+    required this.phone,
   }) : super(key: key);
 
   final String name;
@@ -29,6 +35,16 @@ class DriverCard extends StatelessWidget {
   final String to;
   final String dis;
   final String price;
+  final String phone;
+  final Map<String, String> arguments;
+  Future<void> _launchPhone() async {
+    final Uri phoneUri = Uri(scheme: 'tel', path: phone);
+    if (await canLaunchUrl(phoneUri)) {
+      await launchUrl(phoneUri);
+    } else {
+      throw 'لا يمكن فتح تطبيق الاتصال';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +58,13 @@ class DriverCard extends StatelessWidget {
           ),
           builder: (BuildContext context) {
             double distanceInDouble = double.parse(dis); // تحويل النص إلى رقم
-            double time = distanceInDouble * 2.5..toStringAsFixed(2);
-            String fare = (20 + (double.parse(dis) * double.parse(price)) + (time * 0.5)).toStringAsFixed(2);
+            double time = distanceInDouble * 2.5; // النتيجة تبقى double
+            time = double.parse(time.toStringAsFixed(
+                2)); // لتقليل الدقة إلى رقمين عشريين إذا لزم الأمر
+
+            String fare =
+                (20 + (double.parse(dis) * double.parse(price)) + (time * 0.5))
+                    .toStringAsFixed(2);
 
             return Padding(
               padding: EdgeInsets.symmetric(horizontal: 10.w),
@@ -59,12 +80,17 @@ class DriverCard extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        const CircleAvatar(
-                          backgroundColor: Color(0xff3D7E64),
-                          child: Icon(
-                            Icons.call,
-                            size: 25,
-                            color: ColorManager.mainWhite,
+                        GestureDetector(
+                          onTap: () {
+                            _launchPhone();
+                          },
+                          child: const CircleAvatar(
+                            backgroundColor: Color(0xff3D7E64),
+                            child: Icon(
+                              Icons.call,
+                              size: 25,
+                              color: ColorManager.mainWhite,
+                            ),
                           ),
                         ),
                         horizentalSpacing(10),
@@ -200,7 +226,14 @@ class DriverCard extends StatelessWidget {
                     CustomButton(
                       buttonText: 'تأكيد الرحلة',
                       textStyle: FontManager.font15WhiteMedium,
-                      onPressed: () {},
+                      onPressed: () {
+                        arguments['dis'] = dis;
+                        arguments['time'] = time.toString();
+                        arguments['fare'] = fare;
+                        arguments['driverName'] = name;
+                        context.pushNamed(Routes.paymentSreen,
+                            arguments: arguments);
+                      },
                       backgroundColor: ColorManager.mainBlack,
                     ),
                     verticaalSpacing(15),

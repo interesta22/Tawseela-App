@@ -40,6 +40,7 @@ class DriversScreen extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index) {
                     final driver = drivers[index];
                     return DriverCard(
+                      arguments: arguments,
                       price: arguments['price']!,
                       name: driver.name,
                       rating: driver.rating.toString(),
@@ -47,7 +48,7 @@ class DriversScreen extends StatelessWidget {
                       img: driver.img,
                       from: arguments['from']!,
                       to: arguments['to']!,
-                      dis: arguments['dis']!
+                      dis: arguments['dis']!, phone: driver.phone,
                     );
                   },
                 );

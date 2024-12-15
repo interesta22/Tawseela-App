@@ -7,7 +7,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tewseela_app/core/constants/app_colors.dart';
 import 'package:tewseela_app/core/widgets/custom_button.dart';
 import 'package:tewseela_app/core/constants/app_text_styles.dart';
-import 'package:tewseela_app/features/ride%20request/ui/screens/drivers.dart';
 
 class CusomeContainerCar extends StatelessWidget {
   final String carName;
@@ -46,10 +45,11 @@ class CusomeContainerCar extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.clip,
                 ),
-                Text(
-                  'اللون : $carColor | الأجرة : ${carPrice.toStringAsFixed(2)} ج.م',
+               Text(
+                  'اللون : $carColor',
                   style: AppTextStyles.detilsCar,
                 ),
+
                 const SizedBox(height: 30),
                 CustomButton(
                   backgroundColor: ColorManager.mainWhite,

@@ -34,7 +34,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 CusomNotifcatio(),
-                cusomNONotifica(),
+                cusomNONotifica(title: 'خلاص مفيش  اشعارات تاني',),
               ],
             ),
           ),

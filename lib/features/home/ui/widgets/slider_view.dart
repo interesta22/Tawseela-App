@@ -1,3 +1,4 @@
+import 'dart:async'; // لإضافة Timer
 import 'package:flutter/material.dart';
 import 'package:tewseela_app/core/utils/colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,6 +14,7 @@ class SliderView extends StatefulWidget {
 
 class _SliderViewState extends State<SliderView> {
   final PageController pageController = PageController();
+  late Timer _timer; // تعريف الـ Timer
   List<WelcomeSlider> sliders = const [
     WelcomeSlider(
       title: 'دايماً معاك',
@@ -37,7 +39,22 @@ class _SliderViewState extends State<SliderView> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    // بدء الـ Timer للتنقل بين الصفحات كل 4 ثواني
+    _timer = Timer.periodic(const Duration(seconds: 4), (timer) {
+      if (pageController.page != null) {
+        int nextPage = (pageController.page! + 1).toInt() % sliders.length;
+        pageController.animateToPage(nextPage,
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeInOut);
+      }
+    });
+  }
+
+  @override
   void dispose() {
+    _timer.cancel(); // إلغاء الـ Timer عند التخلص من الـ widget
     pageController.dispose();
     super.dispose();
   }
@@ -59,8 +76,7 @@ class _SliderViewState extends State<SliderView> {
                 child: WelcomeSlider(
                   title: sliders[index].title,
                   subTitle: sliders[index].subTitle,
-                  img:
-                      sliders[index].img, // تغيير الصورة وفقًا للـ index
+                  img: sliders[index].img, // تغيير الصورة وفقًا للـ index
                 ),
               );
             },

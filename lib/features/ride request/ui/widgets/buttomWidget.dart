@@ -1,8 +1,8 @@
-// ignore: camel_case_types
 import 'package:flutter/material.dart';
+import 'package:tewseela_app/core/constants/snackbar.dart';
 import 'package:tewseela_app/core/constants/app_colors.dart';
 import 'package:tewseela_app/core/constants/app_text_styles.dart';
-import 'package:tewseela_app/core/constants/snackbar.dart';
+// ignore: camel_case_types
 // import 'package:tawssela2_app/core/utils/custom_snackbar.dart'; // استدعاء CustomSnackBar
 
 // ignore: camel_case_types

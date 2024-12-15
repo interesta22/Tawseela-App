@@ -1,16 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:tewseela_app/core/utils/fonts.dart';
+import 'package:tewseela_app/core/utils/colors.dart';
+import 'package:tewseela_app/core/routing/routs.dart';
+import 'package:tewseela_app/core/helpers/spacing.dart';
+import 'package:tewseela_app/core/helpers/extensions.dart';
+import 'package:tewseela_app/core/widgets/custom_button.dart';
+import 'package:tewseela_app/core/widgets/CusomAppBarCar.dart';
 import 'package:tewseela_app/core/constants/app_text_styles.dart';
-import 'package:tewseela_app/features/Payment/ui/widget/CusomeAppBar.dart';
-import 'package:tewseela_app/features/Payment/ui/widget/CusomlineINpayment.dart';
-import 'package:tewseela_app/features/Payment/ui/widget/DiscountCodeField.dart';
-import 'package:tewseela_app/features/Payment/ui/widget/DividerWidget.dart';
-import 'package:tewseela_app/features/Payment/ui/widget/DoditDivider.dart';
-import 'package:tewseela_app/features/Payment/ui/widget/buttomWidget.dart';
-import 'package:tewseela_app/features/Payment/ui/widget/paymentMethod.dart';
+import 'package:tewseela_app/features/ride%20request/ui/widgets/driver_card.dart';
+import 'package:tewseela_app/features/ride%20request/ui/widgets/CusomeAppBar.dart';
+import 'package:tewseela_app/features/ride%20request/ui/widgets/DoditDivider.dart';
+import 'package:tewseela_app/features/ride%20request/ui/widgets/buttomWidget.dart';
+import 'package:tewseela_app/features/ride%20request/ui/widgets/DividerWidget.dart';
+import 'package:tewseela_app/features/ride%20request/ui/widgets/paymentMethod.dart';
+import 'package:tewseela_app/features/ride%20request/logic/cubit/request_cubit.dart';
+import 'package:tewseela_app/features/ride%20request/ui/widgets/DiscountCodeField.dart';
+import 'package:tewseela_app/features/ride%20request/ui/widgets/CusomlineINpayment.dart';
 
 class Paymentscreen extends StatefulWidget {
   static const String id = 'Paymentscreen';
-  const Paymentscreen({super.key});
+  final Map<String, String> arguments;
+  const Paymentscreen({super.key, required this.arguments});
+  String? getUserUID() {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      return user.uid; // UID الخاص بالمستخدم الحالي
+    }
+    return null; // في حال لم يكن هناك مستخدم مسجل دخول
+  }
 
   @override
   State<Paymentscreen> createState() => _PaymentscreenState();
@@ -23,8 +42,10 @@ class _PaymentscreenState extends State<Paymentscreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const CusomAppBarPayment(),
-        titleTextStyle: AppTextStyles.AppbarTittel,
+        surfaceTintColor: ColorManager.mainWhite,
+        backgroundColor: ColorManager.mainWhite,
+        automaticallyImplyLeading: false,
+        title: const CustomAppBar(title: 'مرحلة الدفع'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -39,64 +60,45 @@ class _PaymentscreenState extends State<Paymentscreen> {
               ),
               child: Column(
                 children: [
-                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        'الفاتورة',
-                        style: AppTextStyles.titelpayment,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  const CusomlineINpayment(
-                    textName: 'الاسم',
-                    textValue: 'احمد خميس محمد',
-                  ),
-                  const CusomlineINpayment(
-                    textName: 'العنوان',
-                    textValue: 'العجمي - البيطاش',
-                  ),
-                  const CusomlineINpayment(
-                    textName: 'رقم الهاتف',
-                    textValue: '01122334455',
-                  ),
-                  const CusomlineINpayment(
+                  verticaalSpacing(5),
+                  CusomlineINpayment(
                     textName: 'اسم السائق',
-                    textValue: 'ايمن محمد',
+                    textValue: widget.arguments['driverName'],
                   ),
-                  const CusomlineINpayment(
+                  CusomlineINpayment(
                     textName: 'من',
-                    textValue: 'كفر الشيخ',
+                    textValue: widget.arguments['from'],
                   ),
-                  const CusomlineINpayment(
+                  CusomlineINpayment(
                     textName: 'الي',
-                    textValue: 'الإسكندرية',
+                    textValue: widget.arguments['to'],
                   ),
-                   Padding(
+                  Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'ج.م100',
+                          textDirection: TextDirection.rtl,
+                          '${widget.arguments['fare']} ج.م',
                           style: AppTextStyles.priceValu,
                         ),
-                        Text(
+                        const Text(
                           'ثمن الرحلة',
                           style: AppTextStyles.priceTrip,
                         ),
                       ],
                     ),
                   ),
-                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    child: Row(
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8),
+                    child: const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'ج.م30',
-                          style: AppTextStyles.discountValu,
+                          textDirection: TextDirection.rtl,
+                          '0 ج.م',
+                          style: AppTextStyles.discount,
                         ),
                         Text(
                           'خصم',
@@ -105,20 +107,23 @@ class _PaymentscreenState extends State<Paymentscreen> {
                       ],
                     ),
                   ),
+                  verticaalSpacing(10),
                   CustomPaint(
                     painter: DashedLinePainter(),
                     size: const Size(double.infinity, 1),
                   ),
-                   Padding(
-                    padding:const EdgeInsets.symmetric(vertical: 8),
+                  verticaalSpacing(10),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'ج.م80',
+                          textDirection: TextDirection.rtl,
+                          '${widget.arguments['fare']} ج.م',
                           style: AppTextStyles.totalPrice,
                         ),
-                        Text(
+                        const Text(
                           'الاجمالي',
                           style: AppTextStyles.totalPrice,
                         ),
@@ -137,18 +142,16 @@ class _PaymentscreenState extends State<Paymentscreen> {
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                // color: Colors.white,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                   Text(
+                  const Text(
                     ': اختر طريقة الدفع',
                     style: AppTextStyles.titelpayment,
                   ),
                   const SizedBox(height: 10),
                   ListTile(
-                    // iconColor: Colors.blue,
                     title: const paymentMethod(
                       title: 'بطاقة الائتمان',
                       icon: Icons.credit_card,
@@ -202,11 +205,39 @@ class _PaymentscreenState extends State<Paymentscreen> {
 
             const SizedBox(height: 20),
 
-            buttomWidget(selectedPaymentMethod: selectedPaymentMethod),
+            CustomButton(
+              buttonText: 'تأكيد الدفع',
+              textStyle: FontManager.font15WhiteMedium,
+              onPressed: () {
+                if (selectedPaymentMethod == null) {
+                  // Show a message or feedback if no payment method is selected
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('الرجاء اختيار طريقة الدفع')),
+                  );
+                } else {
+                  final uid = FirebaseAuth.instance.currentUser?.uid;
+                  context.read<RequestCubit>().simulateRide(
+                        uid: uid!,
+                        from: widget.arguments['from']!,
+                        to: widget.arguments['to']!,
+                        price: widget.arguments['fare']!,
+                        duration: Duration(
+                          microseconds:
+                              (double.parse(widget.arguments['time']!) *
+                                      Duration.microsecondsPerMinute)
+                                  .toInt(),
+                        ),
+                        time: widget.arguments['time']!,
+                        dis: widget.arguments['dis']!
+                      );
+                  context.pushReplacementNamed(Routes.endScreen);
+                }
+              },
+              backgroundColor: ColorManager.mainColor,
+            ),
           ],
         ),
       ),
     );
   }
 }
-

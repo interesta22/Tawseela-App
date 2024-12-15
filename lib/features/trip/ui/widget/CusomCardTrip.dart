@@ -1,32 +1,79 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:tewseela_app/core/utils/fonts.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart'; // لإضافة تنسيق التواريخ
 import 'package:tewseela_app/core/constants/app_colors.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tewseela_app/core/constants/app_text_styles.dart';
 
-
-
-class CusomCardTrip extends StatelessWidget {
+class CustomCardTrip extends StatelessWidget {
   final String fromTripName;
   final String toTripName;
   final String tripDate;
   final String priceTrip;
-  const CusomCardTrip({
-    super.key,
+  final String tripStatus; // إضافة متغير الحالة
+
+  const CustomCardTrip({
+    Key? key,
     required this.fromTripName,
     required this.toTripName,
     required this.tripDate,
     required this.priceTrip,
-  });
+    required this.tripStatus, // إضافة الحالة في البناء
+  }) : super(key: key);
+
+  /// دالة لتنسيق تاريخ الرحلة مع الوقت
+  String _formatTripDate(dynamic tripDate) {
+    final DateFormat dateFormatter = DateFormat('yyyy/MM/dd'); // صيغة التاريخ
+    final DateFormat timeFormatter = DateFormat('HH:mm'); // صيغة الوقت
+    final DateTime now = DateTime.now();
+    final DateTime today = DateTime(now.year, now.month, now.day);
+
+    // إذا كان tripDate من نوع Timestamp
+    if (tripDate is Timestamp) {
+      final DateTime date = tripDate.toDate();
+      String time = timeFormatter.format(date);
+      if (_isSameDay(date, today)) return 'اليوم $time';
+      if (_isSameDay(date, today.add(const Duration(days: 1))))
+        return 'غدًا $time';
+      return '${dateFormatter.format(date)} $time';
+    }
+
+    // إذا كان tripDate نص يمكن تحويله
+    if (tripDate is String) {
+      try {
+        final DateTime date = DateTime.parse(tripDate);
+        String time = timeFormatter.format(date);
+        if (_isSameDay(date, today)) return 'اليوم $time';
+        if (_isSameDay(date, today.add(const Duration(days: 1))))
+          return 'غدًا $time';
+        return '${dateFormatter.format(date)} $time';
+      } catch (e) {
+        return 'تاريخ غير صالح'; // معالجة الأخطاء
+      }
+    }
+
+    // إذا لم يكن النوع مدعومًا
+    return 'نوع التاريخ غير مدعوم';
+  }
+
+  /// دالة لمقارنة تاريخين للتأكد من أنهما في نفس اليوم
+  bool _isSameDay(DateTime date1, DateTime date2) {
+    return date1.year == date2.year &&
+        date1.month == date2.month &&
+        date1.day == date2.day;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
       child: Container(
-        height: 220,
+        padding: const EdgeInsets.all(10),
         width: double.infinity,
         decoration: BoxDecoration(
+          color: AppColors.backgroundColor,
+          borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.5),
@@ -35,19 +82,26 @@ class CusomCardTrip extends StatelessWidget {
               offset: const Offset(0, 1),
             ),
           ],
-          // border: Border.all(color: Colors.grey),
-          borderRadius: BorderRadius.circular(10),
-          color: AppColors.backgroundColor,
-          // color: const Color(0xFFE5E5E5),
         ),
         child: Column(
+          mainAxisSize: MainAxisSize.min, // Adjust size to fit children
           children: [
+            // Row for "fromTripName" with location icon
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text(
-                  fromTripName,
-                  style: AppTextStyles.fromintrip,
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Text(
+                        fromTripName,
+                        style: FontManager.font17BlackLight,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ),
                 ),
                 IconButton(
                   onPressed: () {},
@@ -58,28 +112,30 @@ class CusomCardTrip extends StatelessWidget {
                 ),
               ],
             ),
+            // Row for "tripDate" with timeline icon
             Padding(
               padding: const EdgeInsets.only(left: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    tripDate,
-                    style: AppTextStyles.datetrip,
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Image.asset('assets/images/Line 2.png'),
-                  ),
-                ],
+              child: Text(
+                _formatTripDate(tripDate), // استدعاء دالة تنسيق التاريخ
+                style: AppTextStyles.datetrip,
               ),
             ),
+            // Row for "toTripName" with location dot icon
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text(
-                  toTripName,
-                  style: AppTextStyles.fromintrip,
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Text(
+                        toTripName,
+                        style: FontManager.font17BlackLight,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ),
                 ),
                 IconButton(
                   onPressed: () {},
@@ -90,42 +146,32 @@ class CusomCardTrip extends StatelessWidget {
                 ),
               ],
             ),
+            // Divider line
             const Divider(
               color: Colors.grey,
-              thickness: sqrt1_2,
+              thickness: 1.0,
             ),
+            // Row for "priceTrip" and action buttons
             Padding(
-              padding: const EdgeInsets.only(right: 26),
+              padding: const EdgeInsets.all(10),
               child: Row(
                 children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.arrow_back_ios_new_outlined,
-                      color: Colors.grey,
-                      // size: 10,
-                    ),
+                  Text(
+                    tripStatus == 'جارية'
+                        ? 'جارية'
+                        : 'اكتملت', // النص بناءً على الحالة
+                    style: tripStatus == 'جارية'
+                        ? AppTextStyles.currentTrip // لون أخضر
+                        : AppTextStyles.endTrip, // لون رمادي
                   ),
-                  if (true)
-                    const Text('اكتملت', style: AppTextStyles.buttonTexttrip),
-                  // else{
-                  //   const Text('قيد التنفيذ', style: AppTextStyles.buttonTexttrip)
-                  // }
                   const Spacer(),
                   Text(
-                    '$priceTrip م.ج',
+                    'ج.م $priceTrip',
                     style: AppTextStyles.fromintrip,
                   ),
-                  // IconButton(
-                  //   onPressed: () {},
-                  //   icon: const Icon(
-                  //     Icons.attach_money_outlined,
-                  //     color: Colors.grey,
-                  //   ),
-                  // )
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

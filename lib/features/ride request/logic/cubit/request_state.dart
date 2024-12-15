@@ -24,3 +24,15 @@ class RequestError extends RequestState {
 
   RequestError({required this.message});
 }
+
+class RideSavedState extends RequestState {
+  final String message;
+
+  RideSavedState({required this.message});
+}
+
+class RideUpdatedState extends RequestState {
+  final String message;
+
+  RideUpdatedState({required this.message});
+}

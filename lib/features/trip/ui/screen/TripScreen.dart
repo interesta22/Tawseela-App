@@ -1,40 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tewseela_app/core/utils/colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tewseela_app/features/home/logic/cubit/trip_cubit.dart';
 import 'package:tewseela_app/features/trip/ui/widget/CusomCardTrip.dart';
 import 'package:tewseela_app/features/trip/ui/widget/CusomAppBarTrip.dart';
-// // import 'dart:math';
 
-
-class Tripscreen extends StatelessWidget {
+class Tripscreen extends StatefulWidget {
   static String id = '/Tripscreen';
 
   const Tripscreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    // قائمة من الرحلات
-    final trips = [
-      {
-        'fromTripName': 'المنزل',
-        'toTripName': 'الجامعه',
-        'tripDate': '17 oct 2024',
-        'priceTrip': '130',
-      },
-      {
-        'fromTripName': 'المطار',
-        'toTripName': 'المنتزه',
-        'tripDate': '18 oct 2024',
-        'priceTrip': '100',
-      },
-      {
-        'fromTripName': 'المكتب',
-        'toTripName': 'المدرسة',
-        'tripDate': '19 oct 2024',
-        'priceTrip': '80',
-      },
-    ];
+  State<Tripscreen> createState() => _TripscreenState();
+}
 
+class _TripscreenState extends State<Tripscreen> {
+  late final String userId;
+
+  @override
+  void initState() {
+    super.initState();
+    // Get the user ID and fetch trips
+    final currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser == null) {
+      // Handle null user (redirect or show a message)
+      Navigator.of(context).pop();
+      return;
+    }
+    userId = currentUser.uid;
+
+    // Fetch trips for the user
+    context.read<TripCubit>().fetchAllTrips(uid: userId);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: ColorManager.mainWhite,
@@ -43,16 +45,33 @@ class Tripscreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.only(right: 30.w, left: 30.w, top: 10.h),
-          child: ListView.builder(
-            itemCount: trips.length, // عدد العناصر في القائمة
-            itemBuilder: (context, index) {
-              return CusomCardTrip(
-                fromTripName: trips[index]['fromTripName'] as String,
-                toTripName: trips[index]['toTripName'] as String,
-                tripDate: trips[index]['tripDate'] as String,
-                priceTrip: trips[index]['priceTrip'] as String,
-              );
+          padding: EdgeInsets.only(top: 20.h, right: 15.w, left: 15.w),
+          child: BlocBuilder<TripCubit, TripState>(
+            builder: (context, state) {
+              if (state is TripLoading) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (state is TripsLoaded) {
+                if (state.tripsData.isEmpty) {
+                  return const Center(child: Text('لا توجد رحلات متاحة.'));
+                }
+                final reversedTrips = state.tripsData.reversed.toList();
+                return ListView.builder(
+                  itemCount: reversedTrips.length,
+                  itemBuilder: (context, index) {
+                    final trip = reversedTrips[index];
+                    return CustomCardTrip(
+                      fromTripName: trip['from'] ?? 'غير معروف',
+                      toTripName: trip['to'] ?? 'غير معروف',
+                      tripDate: trip['date'] ?? 'غير محدد',
+                      priceTrip: trip['price'] ?? 'غير محدد',
+                      tripStatus: trip['status'] ?? 'غير محدد',
+                    );
+                  },
+                );
+              } else if (state is TripError) {
+                return Center(child: Text('خطأ: ${state.message}'));
+              }
+              return Container(); // Default empty state
             },
           ),
         ),
@@ -60,31 +79,3 @@ class Tripscreen extends StatelessWidget {
     );
   }
 }
-
-// import 'package:flutter/material.dart';
-// import 'package:tawssela2_app/feature/trip/ui/widget/CusomAppBarTrip.dart';
-// import 'package:tawssela2_app/feature/trip/ui/widget/CusomCardTrip.dart';
-
-// class Tripscreen extends StatelessWidget {
-//   static String id = '/Tripscreen';
-
-//   const Tripscreen({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const CusomAppBarTrip(),
-//       ),
-//       body: const Padding(
-//         padding: EdgeInsets.symmetric(horizontal: 30, vertical: 8),
-//         child: CusomCardTrip(
-//           fromTripName: 'المنزل',
-//           toTripName: 'الجامعه',
-//           tripDate: '17 oct 2024',
-//           priceTrip: 130,
-//         ),
-//       ),
-//     );
-//   }
-// }

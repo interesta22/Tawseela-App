@@ -11,4 +11,6 @@ class Routes {
   static const String bottomNavBar = '/bottomNavBar';
   static const String trackLocation = '/trackLocation';
   static const String driversScreen = '/driversScreen';
+  static const String paymentSreen = '/paymentScreen';
+  static const String endScreen = '/endScreen';
 }

@@ -1,5 +1,7 @@
-import 'package:flutter/material.dart';
 import 'app_colors.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 class AppTextStyles {
   // ignore: constant_identifier_names
@@ -110,7 +112,13 @@ class AppTextStyles {
     // fontWeight: FontWeight.bold,
     color: AppColors.thirdColor,
   );
-  static const TextStyle buttonTexttrip = TextStyle(
+  static const TextStyle currentTrip = TextStyle(
+    color: Colors.green,
+    fontFamily: 'Alexandria',
+    fontSize: 18,
+    // fontWeight: FontWeight.bold,
+  );
+  static const TextStyle endTrip = TextStyle(
     color: AppColors.primaryColor,
     fontFamily: 'Alexandria',
     fontSize: 18,
@@ -130,15 +138,15 @@ class AppTextStyles {
   );
 
   static TextStyle paymntText1 = TextStyle(
-    fontSize: 18.0,
+    fontSize: 18.0.sp,
     fontFamily: 'Alexandria',
     fontWeight: FontWeight.normal,
     color: AppColors.greyColor,
   );
-  static const TextStyle paymntText2 = TextStyle(
-    fontSize: 12.0,
+  static TextStyle paymntText2 = TextStyle(
+    fontSize: 13.sp,
     fontFamily: 'Alexandria',
-    fontWeight: FontWeight.normal,
+    fontWeight: FontWeight.w800,
     color: AppColors.thirdColor,
   );
   static const TextStyle titelpayment = TextStyle(

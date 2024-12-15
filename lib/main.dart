@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tewseela_app/tawseela_app.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:tewseela_app/core/utils/colors.dart';
-import 'package:tewseela_app/core/routing/routs.dart';
 import 'package:tewseela_app/core/routing/app_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tewseela_app/features/home/logic/cubit/trip_cubit.dart';
 import 'package:tewseela_app/features/auth/logic/cubit/auth_cubit.dart';
 import 'package:tewseela_app/features/onboarding/ui/screens/onboarding.dart';
 import 'package:tewseela_app/features/onboarding/logic/onboarding_cubit.dart';
@@ -17,6 +17,7 @@ void main() async {
   runApp(
     MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => TripCubit()),
         BlocProvider(create: (context) => AuthCubit()),
       ],
       child: const MyApp(),
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
                 return Scaffold(
                   body: Center(
                     child: Lottie.asset(
-                      'assets/animations/Animation - 1733780324100.json',
+                      'assets/animations/MMNSURs8Py.json',
                       repeat: true,
                       frameRate: FrameRate.max,
                     ),

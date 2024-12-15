@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tewseela_app/core/utils/fonts.dart';
-import 'package:tewseela_app/core/utils/colors.dart';
 import 'package:tewseela_app/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tewseela_app/core/widgets/CusomAppBarCar.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:tewseela_app/core/constants/app_text_styles.dart';
+import 'package:tewseela_app/features/auth/ui/screens/login.dart';
+import 'package:tewseela_app/features/auth/logic/cubit/auth_cubit.dart';
 import 'package:tewseela_app/features/profile/ui/widgets/profile_menu.dart';
 import 'package:tewseela_app/features/Notifications/ui/widgets/CusomAppBar.dart';
+
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -53,17 +53,32 @@ class ProfileScreen extends StatelessWidget {
                         height: 130.h,
                       ),
                     ),
-                    
                   ],
                 ),
                 verticaalSpacing(15),
-                ProfileMenu(text: 'تعديل الملف', icon: HugeIcons.strokeRoundedUser),
-                ProfileMenu(text: 'العناوين', icon: HugeIcons.strokeRoundedLocation01),
-                ProfileMenu(text: 'القسائم ', icon: HugeIcons.strokeRoundedTicket01),
-                ProfileMenu(text: 'العروض', icon: HugeIcons.strokeRoundedSaleTag02),
-                ProfileMenu(text: 'عن التطبيق', icon: HugeIcons.strokeRoundedInformationCircle),
-                ProfileMenu(text: 'تسجيل خروج', icon: HugeIcons.strokeRoundedLogout02),
-                ProfileMenu(text: 'حذف الحساب', icon: HugeIcons.strokeRoundedUserRemove01),
+                ProfileMenu(
+                    text: 'تعديل الملف', icon: HugeIcons.strokeRoundedUser),
+                ProfileMenu(
+                    text: 'العناوين', icon: HugeIcons.strokeRoundedLocation01),
+                ProfileMenu(
+                    text: 'القسائم ', icon: HugeIcons.strokeRoundedTicket01),
+                ProfileMenu(
+                    text: 'العروض', icon: HugeIcons.strokeRoundedSaleTag02),
+                ProfileMenu(
+                    text: 'عن التطبيق',
+                    icon: HugeIcons.strokeRoundedInformationCircle),
+                ProfileMenu(
+                  text: 'تسجيل خروج',
+                  icon: HugeIcons.strokeRoundedLogout02,
+                  press: () {
+                    context.read<AuthCubit>().logout();
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => LoginScreen()));
+                  },
+                ),
+                ProfileMenu(
+                    text: 'حذف الحساب',
+                    icon: HugeIcons.strokeRoundedUserRemove01),
               ],
             ),
           ),
@@ -72,4 +87,3 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 }
-

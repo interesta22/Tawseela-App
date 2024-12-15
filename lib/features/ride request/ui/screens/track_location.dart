@@ -291,8 +291,29 @@ class _TrackLocationState extends State<TrackLocation> {
                             buttonText: 'تأكيد',
                             textStyle: FontManager.font15WhiteMedium,
                             onPressed: () {
+                              if (currentLocation == null) {
+                                // عرض رسالة تحذير إذا لم يتم تحديد الموقع الحالي
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('يرجى تحديد موقعك الحالي.'),
+                                  ),
+                                );
+                                return;
+                              }
+
+                              if (destinationMarker == null) {
+                                // عرض رسالة تحذير إذا لم يتم تحديد الوجهة
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('يرجى اختيار الوجهة أولاً.'),
+                                  ),
+                                );
+                                return;
+                              }
+
+                              // الانتقال للصفحة التالية عند توفر الموقع الحالي والوجهة
                               Map<String, String> arguments = {
-                                'dis' : distanceInMeters.toString(),
+                                'dis': distanceInMeters?.toString() ?? '',
                                 'from': currentLocationController.text,
                                 'to': destinationLocationController.text,
                               };
@@ -301,6 +322,7 @@ class _TrackLocationState extends State<TrackLocation> {
                             },
                             backgroundColor: ColorManager.mainColor,
                           ),
+
                           SizedBox(height: 15.h),
                         ],
                       ),
